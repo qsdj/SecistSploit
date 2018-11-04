@@ -82,6 +82,8 @@ class CommandInput():
             self.state_dict[state].append(command)
 
     def input(self, input: str) -> bool:
+        if not input:
+            return
         inputList = input.split()
         for command in self.state_dict[self.state]:
             if inputList[0] == command.word:
