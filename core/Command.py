@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import abc
+import re
+import subprocess
 from core.Printer import *
 from core.Help import *
+from core.Search import *
 command_word = []
 
 
@@ -40,6 +43,27 @@ class Help(BaseCommand):
 
 class Search(BaseCommand):
     word = 'search'
+    help = 'search word'
+
+    def run(self, state,  *args, **kwargs):
+
+        if len(args) < 1:
+           print_error(self.help)
+           return
+        pattern = re.compile(args[0])
+        for path in module_path:
+            if pattern.findall(path):
+                print_info(path)
+
+class Exec(BaseCommand):
+    word = 'exec'
+    help = 'usage: exec command '
+
+    def run(self, state,  *args, **kwargs):
+        if len(args) < 1:
+           print_error(self.help)
+        subprocess.call(args)
+
 
 class CommandInput():
     """
@@ -61,10 +85,12 @@ class CommandInput():
         inputList = input.split()
         for command in self.state_dict[self.state]:
             if inputList[0] == command.word:
-                command(self.state, inputList)
+                command(self.state, *inputList[1:])
                 return True
         return False
 
 command_handle = CommandInput()
 command_handle.registered('all', Exit())
 command_handle.registered('all', Help())
+command_handle.registered('all', Search())
+command_handle.registered('all', Exec())

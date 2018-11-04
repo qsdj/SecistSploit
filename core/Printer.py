@@ -6,6 +6,7 @@ import collections
 import warnings
 from prompt_toolkit import print_formatted_text, HTML
 from weakref import WeakKeyDictionary
+from xml.sax.saxutils import escape
 
 try:
     import queue
@@ -120,11 +121,13 @@ def color_print(string: str, color: str ='', *args, **kwargs ) -> None:
     sep = kwargs.get("sep", " ")
     end = kwargs.get("end", "\n")
     thread = threading.current_thread()
+    string = escape(string)
     try:
         _file = ThreadOutputStream.get(thread, ())[-1]
     except IndexError:
         _file = kwargs.get("file", sys.stdout)
-    text = HTML("<p fg='{color}'>{text}</p>".format(color=color, text=string))
+    text = HTML("<p fg='{color}'>{text}</p>".format(color=color,\
+                                                    text=string))
     PrinterQueue.put(PrintResource(text=text, sep=sep, end=end, file=_file, thread=thread))
 
 

@@ -14,8 +14,9 @@ from core.Printer import *
 from core.Exploit import GLOBAL_OPTS
 from core.Payloads import BasePayload
 from prompt_toolkit import *
-# from core.Command import command_handle
-# from core.Prompt import *
+from core.Command import command_handle
+from core.Prompt import *
+from core.Search import *
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 platform = sys.platform
 
@@ -34,6 +35,7 @@ class Interpreter(BaseInterpreter):
     def __init__(self):
         super(Interpreter, self).__init__()
         PrinterThread().start()
+        list_module('modules')
 
     def run(self):
         while True:
