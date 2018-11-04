@@ -1,12 +1,13 @@
-# coding:utf-8
+#!/usr/bin/env python
+# encoding: utf-8
 import abc
 import re
 import subprocess
 from core.Printer import *
 from core.Help import *
 from core.Search import *
-
 command_word = []
+
 
 class BaseCommand:
     metaclass__ = abc.ABCMeta

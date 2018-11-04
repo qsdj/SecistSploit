@@ -1,4 +1,5 @@
-# coding:utf-8
+#!/usr/bin/env python
+# encoding: utf-8
 import importlib
 from core.Encoders import BaseEncoder
 from core.Payloads import architectures_wrapper
@@ -17,6 +18,5 @@ class Encoder(BaseEncoder):
     def encode(self, payload):
         source = bytes(payload)
         source_hash = importlib.util.source_hash(source)
-        bytecode = importlib._bootstrap_external._code_to_hash_pyc(source,\
-                                                                   source_hash)
+        bytecode = importlib._bootstrap_external._code_to_hash_pyc(source, source_hash)
         return str(bytecode)

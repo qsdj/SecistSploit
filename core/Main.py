@@ -30,14 +30,6 @@ class BaseInterpreter(object):
             os.system('cls')
         self.banner = ""
 
-    def setup(self):
-        """ Initialization of third-party libraries
-        Setting interpreter history.
-        Setting appropriate completer function.
-        :return:
-        """
-        pass
-
 
 class Interpreter(BaseInterpreter):
     def __init__(self):
@@ -47,6 +39,5 @@ class Interpreter(BaseInterpreter):
 
     def run(self):
         while True:
-            command =  session.prompt(prompt_message, completer=command_completer, \
-                                      complete_while_typing=True,  auto_suggest=AutoSuggestFromHistory())
+            command = session.prompt(prompt_message, completer=command_completer, complete_while_typing=True, auto_suggest=AutoSuggestFromHistory())
             command_handle.input(command)
