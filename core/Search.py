@@ -7,9 +7,12 @@ module_word = []
 module_path = []
 
 def list_module(dir):
+    # TODO bug满天飞
     for _ in listdir(dir):
-        module_word.append[_]
-        if isdir(_):
-            list_module(join(dir, _))
-        if isfile(_) and _.split('.')[-1] == 'py':
+        module_word.append(_)
+        rel_path = join(dir, _)
+        if isdir(rel_path):
+            list_module(rel_path)
+
+        if isfile(rel_path) and _.split('.')[-1] == 'py':
            module_path.append(join(dir,_[:-3]))
