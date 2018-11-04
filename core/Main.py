@@ -14,8 +14,8 @@ from core.Printer import *
 from core.Exploit import GLOBAL_OPTS
 from core.Payloads import BasePayload
 from prompt_toolkit import *
-from core.Command import command_handle
-from core.Prompt import *
+# from core.Command import command_handle
+# from core.Prompt import *
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 platform = sys.platform
 
@@ -29,14 +29,6 @@ class BaseInterpreter(object):
             os.system('cls')
         self.banner = ""
 
-    def setup(self):
-        """ Initialization of third-party libraries
-        Setting interpreter history.
-        Setting appropriate completer function.
-        :return:
-        """
-        pass
-
 
 class Interpreter(BaseInterpreter):
     def __init__(self):
@@ -45,6 +37,5 @@ class Interpreter(BaseInterpreter):
 
     def run(self):
         while True:
-            command =  session.prompt(prompt_message, completer=command_completer, \
-                                      complete_while_typing=True,  auto_suggest=AutoSuggestFromHistory())
+            command = session.prompt(prompt_message, completer=command_completer, complete_while_typing=True, auto_suggest=AutoSuggestFromHistory())
             command_handle.input(command)

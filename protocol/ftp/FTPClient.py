@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Copyright 2018, The RouterSploit Framework (RSF) by Threat9 All rights
-# reserved.
+# Copyright 2018, The RouterSploit Framework (RSF) by Threat9 All rights reserved.
 import ftplib
 import io
 from core.Printer import print_error, print_success
